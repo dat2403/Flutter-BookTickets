@@ -1,3 +1,4 @@
+import 'package:booktickets/utils/app_info_list.dart';
 import 'package:booktickets/utils/app_styles.dart';
 import 'package:booktickets/widgets/hotel_view.dart';
 import 'package:booktickets/widgets/ticket_view.dart';
@@ -14,119 +15,121 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Styles.bgColor,
       body: ListView(
         children: [
-          Container(
-            child: Column(
-              children: [
-                const Gap(40),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Good morning",
-                            style: Styles.headerLineStyle3.copyWith(
-                                color: Colors.grey),),
-                          const Gap(5),
-                          Text("Book Tickets", style: Styles.headerLineStyle1,)
-                        ],
-                      ),
-                      Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: const DecorationImage(
-                                image: AssetImage("assets/images/img_1.png")
-                            )
+          Column(
+            children: [
+              const Gap(40),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Good morning",
+                          style: Styles.headerLineStyle3
+                              .copyWith(color: Colors.grey),
                         ),
-                      )
-                    ],
-                  ),
-                ),
-                const Gap(25),
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                      horizontal: 20),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 12, vertical: 12),
-                  child: Row(
-                    children: [
-                      const Icon(FluentSystemIcons.ic_fluent_search_regular,
-                        color: Color(0xFFBFC205),),
-                      const Gap(15),
-                      Text(
-                        "Search",
-                        style: Styles.headerLineStyle4,
-                      )
-                    ],
-                  ),
-                ),
-                const Gap(25),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Upcoming Flights", style: Styles.headerLineStyle2,),
-                      InkWell(
-                          onTap: () {
-                            print("You tapped!!");
-                          },
-                          child: Text("View all",
-                            style: Styles.textStyle.copyWith(color: Colors.grey),)
-                      )
-                    ],
-                  ),
-                ),
-                const Gap(15),
-                SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Row(
-                      children: const [
-                        TicketView(),
-                        TicketView()
+                        const Gap(5),
+                        Text(
+                          "Book Tickets",
+                          style: Styles.headerLineStyle1,
+                        )
                       ],
+                    ),
+                    Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: const DecorationImage(
+                              image: AssetImage("assets/images/img_1.png"))),
                     )
+                  ],
                 ),
-                const Gap(20),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+              ),
+              const Gap(25),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.white),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                child: Row(
+                  children: [
+                    const Icon(
+                      FluentSystemIcons.ic_fluent_search_regular,
+                      color: Color(0xFFBFC205),
+                    ),
+                    const Gap(15),
+                    Text(
+                      "Search",
+                      style: Styles.headerLineStyle4,
+                    )
+                  ],
+                ),
+              ),
+              const Gap(25),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Upcoming Flights",
+                      style: Styles.headerLineStyle2,
+                    ),
+                    InkWell(
+                        onTap: () {
+                          print("You tapped!!");
+                        },
+                        child: Text(
+                          "View all",
+                          style: Styles.textStyle.copyWith(color: Colors.grey),
+                        ))
+                  ],
+                ),
+              ),
+              const Gap(15),
+              SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.only(left: 20),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Hotels", style: Styles.headerLineStyle2,),
-                      InkWell(
-                          onTap: () {
-                            print("You tapped!!");
-                          },
-                          child: Text("View all",
-                            style: Styles.textStyle.copyWith(color: Colors.grey),)
-                      )
-                    ],
-                  ),
+                    children: ticketList.map((singleTicket) =>
+                        TicketView(ticket: singleTicket)).toList(),
+                  )),
+              const Gap(20),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Hotels",
+                      style: Styles.headerLineStyle2,
+                    ),
+                    InkWell(
+                        onTap: () {
+                          print("You tapped!!");
+                        },
+                        child: Text(
+                          "View all",
+                          style: Styles.textStyle.copyWith(color: Colors.grey),
+                        ))
+                  ],
                 ),
-                const Gap(15),
-                SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Row(
-                      children: const [
-                        HotelView(),
-                        HotelView()
-                      ],
-                    )
-                ),
-              ],
-            ),
-          )
+              ),
+              const Gap(15),
+              SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Row(
+                    children: hotelList.map((singleHotel) => HotelView(hotel: singleHotel)).toList(),
+                  )),
+            ],
+          ),
         ],
       ),
     );

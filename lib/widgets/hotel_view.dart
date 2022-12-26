@@ -1,11 +1,11 @@
 import 'package:booktickets/utils/app_layout.dart';
 import 'package:booktickets/utils/app_styles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class HotelView extends StatelessWidget {
-  const HotelView({Key? key}) : super(key: key);
+  final Map<String, dynamic> hotel;
+  const HotelView({Key? key, required this.hotel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,23 +30,23 @@ class HotelView extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 color: Styles.primaryColor,
-                image: const DecorationImage(
+                image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage("assets/images/one.png"))),
+                    image: AssetImage("assets/images/${hotel['image']}"))),
           ),
           const Gap(15),
           Text(
-            "Open space",
+            hotel['place'],
             style: Styles.headerLineStyle3.copyWith(color: Colors.black),
           ),
           const Gap(10),
           Text(
-            "London",
+            hotel['destination'],
             style: Styles.headerLineStyle3.copyWith(fontWeight: FontWeight.w400),
           ),
           const Gap(14),
           Text(
-            "\$40/night",
+            "\$${hotel['price']}/night",
             style: Styles.headerLineStyle2.copyWith(color: Styles.orangeColor),
           )
         ],
